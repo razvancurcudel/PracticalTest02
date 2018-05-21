@@ -77,6 +77,12 @@ public class CommunicationThread extends Thread {
                     Log.i(Constants.TAG, "[COMMUNICATION THREAD] Getting the information from the cache...");
                     Alarm alarm = data.get(socket.getInetAddress().toString());
 
+                    if(alarm.status == 1)
+                    {
+                        printWriter.println("Inactive");
+                        return;
+                    }
+
                     Socket nistSocket = new Socket("128.138.140.44", 13);
                     if (nistSocket == null) {
                         Log.e(Constants.TAG, "[COMM THREAD] Could not create socket!");
@@ -94,11 +100,13 @@ public class CommunicationThread extends Thread {
                     if(alarm.hour < nistHour)
                     {
                         printWriter.println("Inactive");
+                        alarm.status = 1;
                         return;
                     }
                     else if(alarm.hour == nistHour && alarm.min < nistMin) {
                         printWriter.println("Inactive");
                         printWriter.flush();
+                        alarm.status = 1;
                         return;
                     }
                     else

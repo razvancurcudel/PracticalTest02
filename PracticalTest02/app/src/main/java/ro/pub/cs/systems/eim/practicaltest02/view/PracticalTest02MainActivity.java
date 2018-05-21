@@ -38,7 +38,7 @@ public class PracticalTest02MainActivity extends AppCompatActivity {
 //                Toast.makeText(getApplicationContext(), "[MAIN ACTIVITY] Server port should be filled!", Toast.LENGTH_SHORT).show();
 //                return;
 //            }
-            serverThread = new ServerThread(5000);
+            serverThread = new ServerThread(7000);
             if (serverThread.getServerSocket() == null) {
                 Log.e(Constants.TAG, "[MAIN ACTIVITY] Could not create server thread!");
                 return;
